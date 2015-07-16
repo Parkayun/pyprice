@@ -3,6 +3,7 @@ from __future__ import print_function
 import sys
 
 from .index import current, search
+from .prompt import colored as  c
 
 
 def runner():
@@ -11,32 +12,33 @@ def runner():
 	elif len(sys.argv) == 3:
 		option, keyword = sys.argv[1], sys.argv[2]
 	else:
-		print('Usage: pyprice [option: search] keyword')
+		print('Usage:', c('pyprice [option: search] keyword', 'sian'))
 		raise SystemExit(1)
 
 	if option == 'current':
 		try:
 			data = current(keyword)
-
-			print('Keyword:', data['keys']['displaySymbol'])
-			print('Value:', data['value'])
-			print('Change:', data['change']+',', data['pctChange']+'%')
-			print('Market:', data['exchange'])
+			print(c(data['companyName'], 'magenta'), '/', c(data['keys']['displaySymbol'], 'yellow'))
+			print(c('Current Price', 'sian')+':', data['value'], end=' (')
+			price_color = 'red' if '-' in data['change'] else 'blue'
+			print(c(data['change'], price_color)+',', c(data['pctChange'], price_color)+'%)')
+			print(c('Market', 'sian')+':', data['exchange'])
 		except ValueError:
-			print('Can not find keyword. Try \'pynance search '+keyword+'\'')
+			print(c('Can not find keyword.', 'red'), 'Try', c('pynance search '+keyword, 'sian'))
 
 	elif option == 'search':
 		results = search(keyword)
 		if len(results) == 0:
-			print('Can not find keyword.')
+			print(c('Can not find keyword.', 'red'))
 		else:
 			for result in results:
 				data = result[0]
-				print('Keyword:', data['s'])
-				print('Name:', data['n'], '\n')
+				print(c('Name', 'sian')+':', c(data['n'], 'magenta'))
+				print(c('Keyword', 'sian')+':', c(data['s'], 'yellow'))
+				print(c('Market', 'sian')+':', data['e'], '\n')
 
 	else:
-		print('Not supported option.')
+		print(c('Not supported option.', 'red'))
 
 
 if __name__ == '__main__':
