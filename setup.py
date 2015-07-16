@@ -43,7 +43,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'pyprice=pyprice.cli:run',
+            'pyprice=pyprice.cli:runner',
         ],
     },
 )
