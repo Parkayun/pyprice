@@ -6,12 +6,13 @@ from .index import current, search
 
 
 def runner():
-	if len(sys.argv) == 1:
-		print('Please type the command.')
-	elif len(sys.argv) == 2:
+	if len(sys.argv) == 2:
 		option, keyword = 'current', sys.argv[1]
 	elif len(sys.argv) == 3:
 		option, keyword = sys.argv[1], sys.argv[2]
+	else:
+		print('Usage: pyprice [option: search] keyword')
+		raise SystemExit(1)
 
 	if option == 'current':
 		try:
