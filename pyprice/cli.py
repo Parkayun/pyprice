@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from __future__ import print_function
 import sys
 
 from .index import current, search
@@ -6,7 +7,7 @@ from .index import current, search
 
 def runner():
 	if len(sys.argv) == 1:
-		raise ValueError('Please type the command.')
+		print('Please type the command.')
 	elif len(sys.argv) == 2:
 		option, keyword = 'current', sys.argv[1]
 	elif len(sys.argv) == 3:
@@ -34,7 +35,7 @@ def runner():
 				print('Name:', data['n'], '\n')
 
 	else:
-		raise ValueError('Not supported option.')
+		print('Not supported option.')
 
 
 if __name__ == '__main__':
