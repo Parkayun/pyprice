@@ -7,7 +7,7 @@ COLORS = {
     'yellow': '\033[33m',
     'blue': '\033[34m',
     'magenta': '\033[35m',
-    'sian': '\033[36m'
+    'cyan': '\033[36m'
 }
 
 
